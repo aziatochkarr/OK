@@ -1,16 +1,26 @@
-meme_dict = {
-            "Какон": "То же что и канон",
-            "Сасиркнуться": "Сделать что то стыдное, глупое(?), упасть"
-            "Агро/злюся пуся": "Злой и т.п."
-            "Вумен мамонт": "Фу и т.п."
-            "БОЖ": "С большой буквы: шок, с маленькой: эм, фу.."
-            }
+import discord
+from discord.ext import commands
 
-word = input("Введите непонятное слово (большими буквами!): ")
+intents = discord.Intents.default()
+intents.message_content = True
 
-if word in meme_dict.keys():
-    # Что делать, если слово нашлось?
-    print(meme_dict[word])
-else:
-    print("Слово не нашлось")
-    # Что делать, если слово не нашлось?
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Привет! Я бот {bot.user}!')
+
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
+
+@cool.command(name='bot')
+async def _bot(ctx):
+    """Is the bot cool?"""
+    await ctx.send('Yes, the bot is cool.')
+
+bot.run("token")
